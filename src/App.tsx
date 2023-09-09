@@ -1,11 +1,12 @@
 import './App.css'
+import { Blog } from './components/Blog'
 
 function App() {
   
 
   return (
     <>
-      <h1>hlwww</h1>
+      <Blog/>
     </>
   )
 }
