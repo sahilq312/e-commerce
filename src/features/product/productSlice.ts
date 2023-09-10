@@ -5,7 +5,8 @@ export interface PRODUCT {
     id : string,
     title: string,
     thumbnail : string,
-    price: number
+    price: number,
+    description : string
 }
 interface ProductState {
     products : PRODUCT[],
@@ -17,6 +18,12 @@ export const fetchProduct = createAsyncThunk('product/fetch', async()=> {
     const data = await response.json();
     return data.products;
 })
+export const fetchProductById = createAsyncThunk('product/fetchById', async(id:number)=> {
+    const resposne = await fetch(`https://dummyjson.com/products/${id}`)
+    const data = resposne.json();
+    return data;
+})
+
 
 const initialState : ProductState = {
     products: [],
