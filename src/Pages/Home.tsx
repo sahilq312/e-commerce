@@ -1,10 +1,14 @@
 import Navbar from '../components/Navbar'
-import { Blog } from '../features/counter/Blog'
+
+import { ProductList } from '../features/product/ProductList'
+
+
+
 
 export const Home = () => {
   return (
     <Navbar>
-        <Blog/>
+        <ProductList/>
     </Navbar>
   )
 }
