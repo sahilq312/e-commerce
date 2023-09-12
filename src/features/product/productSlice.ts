@@ -18,12 +18,11 @@ export const fetchProduct = createAsyncThunk('product/fetch', async()=> {
     const data = await response.json();
     return data.products;
 })
-export const fetchProductById = createAsyncThunk('product/fetchById', async(id:number)=> {
+export const fetchProductById = createAsyncThunk('product/fetchById', async(id:string| undefined)=> {
     const resposne = await fetch(`https://dummyjson.com/products/${id}`)
     const data = resposne.json();
     return data;
 })
-
 
 const initialState : ProductState = {
     products: [],
@@ -44,6 +43,13 @@ const initialState : ProductState = {
         .addCase(fetchProduct.fulfilled, (state, action)=> {
             state.status = "idle"
             state.products = action.payload
+        })
+        .addCase(fetchProductById.pending, (state)=> {
+            state.status = "loading";
+        })
+        .addCase(fetchProductById.fulfilled, (state, action)=> {
+            state.status = "loading";
+            state.selectedProduct = action.payload;
         })
     }
   })
