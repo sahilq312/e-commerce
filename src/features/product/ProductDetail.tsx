@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchProductById } from "./productSlice";
 import { useParams } from "react-router-dom";
+//import Navbar from "../../components/Navbar";
 const ProductDetail = () => {
   const param = useParams();
   const id = param.id;
@@ -13,20 +14,25 @@ const ProductDetail = () => {
   //console.log(id);
 
   return (
-    <div className="">
-      {product && (
-        <div key={product.id} className=" lg:flex">
-          <div className=" w-1/2 flex justify-center items-center">
-            <img src={product.thumbnail} alt="image" className=" w-2/4" />
-          </div>
-          <div className="flex flex-col text-left">
-            <h1>{product.title}</h1>
-            <h1>{product.description}</h1>
-            <h1>{product.price}</h1>
-          </div>
+    <>
+   
+        <div className=" mt-8">
+          {product && (
+            <div key={product.id} className=" ">
+              {/* left */}
+              <div className="">
+                <img src={product.thumbnail} alt="image" className="" />
+              </div>
+              {/* right */}
+              <div className="">
+                <h1>{product.title}</h1>
+                <h1>{product.description}</h1>
+                <h1>{product.price}</h1>
+              </div>
+            </div>
+          )}
         </div>
-      )}
-    </div>
+    </>
   );
 };
 
