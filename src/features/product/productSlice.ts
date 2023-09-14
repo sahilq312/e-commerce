@@ -6,7 +6,10 @@ export interface PRODUCT {
     title: string,
     thumbnail : string,
     price: number,
-    description : string
+    description : string,
+    brand: string,
+    category: string,
+    rating: number
 }
 interface ProductState {
     products : PRODUCT[],
