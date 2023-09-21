@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { Key } from 'react'
 
 
 export interface PRODUCT {
-    id : string,
+    _id: Key | null | undefined
     title: string,
     thumbnail : string,
     price: number,
@@ -17,12 +18,13 @@ interface ProductState {
     selectedProduct : null | PRODUCT
 }
 export const fetchProduct = createAsyncThunk('product/fetch', async()=> {
-    const response = await fetch("https://dummyjson.com/products")
+    const response = await fetch("http://localhost:3000/product")
     const data = await response.json();
-    return data.products;
+    /* return data.products; */
+    return data;
 })
 export const fetchProductById = createAsyncThunk('product/fetchById', async(id:string| undefined)=> {
-    const resposne = await fetch(`https://dummyjson.com/products/${id}`)
+    const resposne = await fetch(`http://localhost:3000/product//${id}`)
     const data = resposne.json();
     return data;
 })
