@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 
 export interface PRODUCT {
-    id : string,
+    
     title: string,
     thumbnail : string,
     price: number,
