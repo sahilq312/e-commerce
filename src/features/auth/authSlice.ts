@@ -20,8 +20,15 @@ export const loginUserAsync = createAsyncThunk("/auth/login",async(userData) => 
     return data;
 })
 
-export const logoutUserAync = createAsyncThunk("/logout",async () => {
-    const response = await fetch("http://localhost:3000/auth/logout")
+export const logoutUserAync = createAsyncThunk("/logout",async (userData) => {
+    const response = await fetch("http://localhost:3000/auth/logout", {
+        method: "POST",
+        body: JSON.stringify(userData),
+        headers : {
+            
+        },
+        
+    })
     const data = response.json();
     return data;
 })
