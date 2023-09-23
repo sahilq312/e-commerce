@@ -10,13 +10,19 @@ export const registerUserAsync = createAsyncThunk("/auth/register",async(userDat
     return data;
 })
 
-export const loginUserAsync = createAsyncThunk("/auth/login",async(userData) => {
+export interface USERDATA {
+    email : string
+    password : string
+}
+
+
+export const loginUserAsync = createAsyncThunk("/auth/login",async(userData: USERDATA) => {
     const response = await fetch("http://localhost:3000/auth/login", {
         method: 'POST',
         body: JSON.stringify(userData),
-        headers: {'content-type' : 'appication/json'}
+        headers: {'content-type' : 'application/json'}
     })
-    const data = response.json();
+    const data = await response.json();
     return data;
 })
 

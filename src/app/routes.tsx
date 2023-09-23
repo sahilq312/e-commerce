@@ -16,9 +16,6 @@ export const router = createBrowserRouter([
       <Protected>
         <Home />
       </Protected>
-     
-        
-      
     ),
   },
   {

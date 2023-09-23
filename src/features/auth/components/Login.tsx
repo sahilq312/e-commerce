@@ -1,19 +1,21 @@
-import { useForm } from "react-hook-form";
+/* import { useForm } from "react-hook-form";
+import { USERDATA, loginUserAsync } from "../authSlice";
+import { useAppDispatch } from "../../../app/hooks";
 
-interface IFormInputs {
-  email: string;
-  password: string;
-}
+
 
 export const Login = () => {
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInputs>();
+  } = useForm<USERDATA>();
 
-  const onSubmit = (data: IFormInputs) => {
+  const onSubmit = (data: USERDATA) => {
     console.log(data);
+    
+    dispatch(loginUserAsync(data))
   };
 
   return (
@@ -73,3 +75,50 @@ export const Login = () => {
     </section>
   );
 };
+ */
+import React, { useState } from 'react';
+import { loginUserAsync, USERDATA } from '../authSlice';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+
+export const Login = () => {
+  const dispatch = useAppDispatch();
+  const loginStatus = useAppSelector((state) => state.auth.loggedInUserToken);
+  const [userData, setUserData] = useState<USERDATA>({ email: '', password: '' });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      [name]: value,
+    }));
+  };
+
+  const handleLogin = () => {
+    dispatch(loginUserAsync(userData));
+  };
+
+  return (
+    <div>
+      <h2>Login</h2>
+      <input
+        type="text"
+        name="email"
+        placeholder="Email"
+        value={userData.email}
+        onChange={handleInputChange}
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={userData.password}
+        onChange={handleInputChange}
+      />
+      <button onClick={handleLogin}>Login</button>
+      {loginStatus === 'loading' && <p>Loading...</p>}
+      {loginStatus === 'failed' && <p>Login failed. Please check your credentials.</p>}
+      {loginStatus === 'succeeded' && <p>Login successful!</p>}
+    </div>
+  );
+};
+
