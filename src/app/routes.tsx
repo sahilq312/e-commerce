@@ -8,7 +8,6 @@ import { Login } from "../features/auth/components/Login";
 import { Register } from "../features/auth/components/Register";
 import { Protected } from "../features/auth/components/Protected";
 
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -24,11 +23,19 @@ export const router = createBrowserRouter([
   },
   {
     path: "cart",
-    element: <Cart />,
+    element: (
+      <Protected>
+        <Cart />
+      </Protected>
+    ),
   },
   {
     path: "product/:id",
-    element: <ProductDetail />,
+    element: (
+      <Protected>
+        <ProductDetail />
+      </Protected>
+    ),
   },
   {
     path: "/login",

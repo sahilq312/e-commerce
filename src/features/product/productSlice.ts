@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { Key } from 'react'
-
-
+import api from "../../app/Axios"
 export interface PRODUCT {
     _id: Key | null | undefined
     title: string,
@@ -18,15 +17,12 @@ interface ProductState {
     selectedProduct : null | PRODUCT
 }
 export const fetchProduct = createAsyncThunk('product/fetch', async()=> {
-    const response = await fetch("http://localhost:3000/product")
-    const data = await response.json();
-    /* return data.products; */
-    return data;
+    const response = await api.get('http://localhost:3000/product');
+    return response.data;
 })
 export const fetchProductById = createAsyncThunk('product/fetchById', async(id:string| undefined)=> {
-    const resposne = await fetch(`http://localhost:3000/product//${id}`)
-    const data = resposne.json();
-    return data;
+    const resposne = await api.get(`http://localhost:3000/product//${id}`)
+    return resposne.data;
 })
 
 const initialState : ProductState = {

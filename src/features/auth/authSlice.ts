@@ -1,14 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import api from "../../app/Axios"
 
-export const registerUserAsync = createAsyncThunk("/auth/register",async(userData) => {
+/* export const registerUserAsync = createAsyncThunk("/auth/register",async(userData) => {
     const response = await fetch("http://localhost:3000/auth/register", {
         method: 'POST',
         body: JSON.stringify(userData),
-        headers: {'content-type' : 'appication/json'}
+        headers: {'content-type' : 'appication/json'},
     })
     const data = response.json();
     return data;
-})
+}) */
+export const registerUserAsync = createAsyncThunk('/auth/register', async (userData) => {
+    
+      const response = await api.post('http://localhost:3000/auth/register', userData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      return response.data;
+    
+  });
 
 export interface USERDATA {
     email : string
@@ -17,13 +26,11 @@ export interface USERDATA {
 
 
 export const loginUserAsync = createAsyncThunk("/auth/login",async(userData: USERDATA) => {
-    const response = await fetch("http://localhost:3000/auth/login", {
-        method: 'POST',
-        body: JSON.stringify(userData),
-        headers: {'content-type' : 'application/json'}
+    const response = await api.post("http://localhost:3000/auth/login",userData, {
+        headers: {'content-type' : 'application/json'},
     })
-    const data = await response.json();
-    return data;
+    
+    return response.data;
 })
 
 export const logoutUserAync = createAsyncThunk("/logout",async (userData) => {
