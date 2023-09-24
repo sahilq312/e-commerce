@@ -47,9 +47,10 @@ export const logoutUserAync = createAsyncThunk("/logout",async (userData) => {
 })
 
 export const checkAuthAsync = createAsyncThunk("/checkAuth",async () => {
-    const response = await fetch("http://localhost:3000/auth/checkAuth")
-    const data = response.json();
-    return data;
+    const response = await api.post("/auth/check")
+    return response.data;
+    console.log(response);
+    
 })
 
 
@@ -98,8 +99,9 @@ const authSlice = createSlice({
             .addCase(checkAuthAsync.pending, (state)=> {
                 state.status = "loading";
             })
-            .addCase(checkAuthAsync.fulfilled, (state)=>{
+            .addCase(checkAuthAsync.fulfilled, (state, action)=>{
                 state.status = "idle";
+                state.loggedInUserToken = action.payload
                 state.userChecked = true;
             })
     }

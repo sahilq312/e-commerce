@@ -7,7 +7,7 @@ export const Protected =({children} : PROPS)=> {
     const user = useAppSelector((state)=> state.auth.loggedInUserToken);
 
     if(!user){
-        return <Navigate to='/login'/>;
+        return <Navigate to='/login' replace= {true}/>;
     }
     return <>{children}</>;
 } 
