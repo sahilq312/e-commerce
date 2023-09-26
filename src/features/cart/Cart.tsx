@@ -1,11 +1,11 @@
-import { useEffect } from "react"
+import { MouseEvent, useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { fetchCart } from "./cartSlice"
-import { Link } from "react-router-dom"
+import { deleteFromCart, fetchCart } from "./cartSlice"
+import { Link, useNavigate } from "react-router-dom"
 
 
 export const Cart = () => {
-    
+    const navigate = useNavigate()
     const products = useAppSelector((state)=> state.cart.items)
     const status = useAppSelector((state)=> state.cart.status )
     const dispatch = useAppDispatch()
@@ -14,6 +14,12 @@ export const Cart = () => {
     }, [dispatch])
     console.log(products);
     
+
+    function handleRemove(e: MouseEvent, id: string){
+      e.preventDefault()
+      dispatch(deleteFromCart(id))
+      navigate("/cart")
+    }
   return (
     
       <>
@@ -27,7 +33,7 @@ export const Cart = () => {
                               <li key={product._id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
-                                    src={product.thumbnail}
+                                    src={product.productId.thumbnail}
                                     alt="image"
                                     className="h-full w-full object-cover object-center"
                                   />
@@ -37,9 +43,9 @@ export const Cart = () => {
                                   <div>
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                       <h3>
-                                        <a>{product.title}</a>
+                                        <a>{product.productId.title}</a>
                                       </h3>
-                                      <p className="ml-4">{product.price}</p>
+                                      <p className="ml-4">{product.productId.price}</p>
                                     </div>
                                     <p className="mt-1 text-sm text-gray-500">color</p>
                                   </div>
@@ -48,6 +54,7 @@ export const Cart = () => {
 
                                     <div className="flex">
                                       <button
+                                      onClick={(e)=> handleRemove(e, product._id)}
                                         type="button"
                                         className="font-medium text-indigo-600 hover:text-indigo-500"
                                       >

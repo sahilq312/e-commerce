@@ -4,15 +4,52 @@ import api from "../../app/Axios"
 
 
 export const fetchCart = createAsyncThunk("cart/fetch",async () => {
-    const response = await api.get("https://dummyjson.com/products")
+    const response = await api.get("/cart/fetchcart");
+    return response.data;
+    
+})
+
+export const addToCart = createAsyncThunk("cart/add",async (cart : CART) => {
+    const response = await api.post("/add", cart, {
+        headers: {'content-type' : 'application/json'}
+    })
     return response.data;
 })
 
+export const deleteFromCart = createAsyncThunk("cart/delete", async(productId : string)=> {
+    const resposne = await api.delete(`/cart/${productId}`)
+    return resposne.data;
+})
 
+interface CART {
+    userId : string
+    productId : string
+    quantity? : number
+}
+
+interface CARTITEM {
+    _id: string;
+    userId: string;
+    productId: {
+        _id: string;
+        title: string;
+        description: string;
+        price: number;
+        discountPercentage: number;
+        rating: number;
+        stock: number;
+        brand: string;
+        category: string;
+        thumbnail: string;
+        __v: number;
+    };
+    quantity: number;
+    __v: number;
+}
 
 
 interface CartState {
-    items : PRODUCT[],
+    items : CARTITEM[],
     status : string,
     cartLoaded : boolean
 }

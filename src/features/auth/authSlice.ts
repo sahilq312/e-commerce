@@ -33,23 +33,18 @@ export const loginUserAsync = createAsyncThunk("/auth/login",async(userData: USE
     return response.data;
 })
 
-export const logoutUserAync = createAsyncThunk("/logout",async (userData) => {
-    const response = await fetch("http://localhost:3000/auth/logout", {
-        method: "POST",
-        body: JSON.stringify(userData),
-        headers : {
-            
-        },
-        
-    })
-    const data = response.json();
-    return data;
+export const logoutUserAync = createAsyncThunk("/logout",async (userData : USERDATA) => {
+    const response = await api.post("/auth/logout", userData, {
+        headers: {'content-type' : 'application/json'},
+    })    
+    return response.data;
 })
 
 export const checkAuthAsync = createAsyncThunk("/checkAuth",async () => {
     const response = await api.post("/auth/check")
     return response.data;
     console.log(response);
+    
     
 })
 
