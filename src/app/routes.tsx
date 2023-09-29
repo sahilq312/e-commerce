@@ -48,6 +48,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "/admin/product",
-    element: <AdminProductList></AdminProductList>
+    element: <Protected><AdminProductList></AdminProductList></Protected>
   }
 ]);
