@@ -6,7 +6,7 @@ export const Blog = () => {
     const dispatch = useAppDispatch();
   return (
     <div>
-        <h1 className="">{count}</h1>
+        <h1 classNameName="">{count}</h1>
         <button onClick={()=> dispatch(increment())}> increment</button>
         <button onClick={()=> dispatch(decrement())}> decrement</button>
         <button onClick={()=> dispatch(incrementByAmt(10))}> increment by 10</button>

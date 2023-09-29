@@ -7,6 +7,7 @@ import ProductDetail from "../features/product/ProductDetail";
 import { Login } from "../features/auth/components/Login";
 import { Register } from "../features/auth/components/Register";
 import { Protected } from "../features/auth/components/Protected";
+import { AdminProductList } from "../features/admin/AdminProductList";
 
 export const router = createBrowserRouter([
   {
@@ -45,4 +46,8 @@ export const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  {
+    path: "/admin/product",
+    element: <AdminProductList></AdminProductList>
+  }
 ]);

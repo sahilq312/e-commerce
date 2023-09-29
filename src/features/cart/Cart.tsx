@@ -28,40 +28,40 @@ export const Cart = () => {
   return (
     
       <>
-                  <div className="mx-auto mt-12 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                      <div className="mt-8">
-                        <div className="flow-root">
+                  <div classNameName="mx-auto mt-12 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div classNameName="border-t border-gray-200 px-4 py-6 sm:px-6">
+                      <div classNameName="mt-8">
+                        <div classNameName="flow-root">
                             {status === "loading" ? <></>: null}
-                          <ul role="list" className="-my-6 divide-y divide-gray-200">
+                          <ul role="list" classNameName="-my-6 divide-y divide-gray-200">
                             {products.map((product) => (
-                              <li key={product._id} className="flex py-6">
-                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                              <li key={product._id} classNameName="flex py-6">
+                                <div classNameName="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
                                     src={product.productId.thumbnail}
                                     alt="image"
-                                    className="h-full w-full object-cover object-center"
+                                    classNameName="h-full w-full object-cover object-center"
                                   />
                                 </div>
 
-                                <div className="ml-4 flex flex-1 flex-col">
+                                <div classNameName="ml-4 flex flex-1 flex-col">
                                   <div>
-                                    <div className="flex justify-between text-base font-medium text-gray-900">
+                                    <div classNameName="flex justify-between text-base font-medium text-gray-900">
                                       <h3>
                                         <a>{product.productId.title}</a>
                                       </h3>
-                                      <p className="ml-4">{product.productId.price}</p>
+                                      <p classNameName="ml-4">{product.productId.price}</p>
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500">color</p>
+                                    <p classNameName="mt-1 text-sm text-gray-500">color</p>
                                   </div>
-                                  <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Qty {/* {product.stock} */}</p>
+                                  <div classNameName="flex flex-1 items-end justify-between text-sm">
+                                    <p classNameName="text-gray-500">Qty {/* {product.stock} */}</p>
 
-                                    <div className="flex">
+                                    <div classNameName="flex">
                                       <button
                                       onClick={(e)=> handleRemove(e, product._id)}
                                         type="button"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        classNameName="font-medium text-indigo-600 hover:text-indigo-500"
                                       >
                                         Remove
                                       </button>
@@ -75,26 +75,26 @@ export const Cart = () => {
                       </div>
                     </div>
 
-                    <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                      <div className="flex justify-between text-base font-medium text-gray-900">
+                    <div classNameName="border-t border-gray-200 px-4 py-6 sm:px-6">
+                      <div classNameName="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
                         <p>${totalPrice}</p>
                       </div>
-                      <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                      <div className="mt-6">
+                      <p classNameName="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+                      <div classNameName="mt-6">
                         <a
                           href="#"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                          classNameName="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         >
                           Checkout
                         </a>
                       </div>
-                      <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+                      <div classNameName="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
                           or
                           <Link
                             type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                            classNameName="font-medium text-indigo-600 hover:text-indigo-500"
                             to="/"
                           >
                             Continue Shopping

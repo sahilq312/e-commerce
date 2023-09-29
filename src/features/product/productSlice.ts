@@ -16,12 +16,20 @@ interface ProductState {
     status: string,
     selectedProduct : null | PRODUCT
 }
+
+export const createProduct = createAsyncThunk('product/create', async(product: PRODUCT)=> {
+    const response = await api.post('/product/create', product, {
+        headers: {}
+    })
+    return response.data;
+})
+
 export const fetchProduct = createAsyncThunk('product/fetch', async()=> {
-    const response = await api.get('http://localhost:3000/product');
+    const response = await api.get('/product');
     return response.data;
 })
 export const fetchProductById = createAsyncThunk('product/fetchById', async(id:string| undefined)=> {
-    const resposne = await api.get(`http://localhost:3000/product//${id}`)
+    const resposne = await api.get(`product/${id}`)
     return resposne.data;
 })
 
