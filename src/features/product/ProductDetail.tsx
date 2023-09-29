@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { fetchProductById } from "./productSlice";
+import {  fetchProductById } from "./productSlice";
 import { useParams } from "react-router-dom";
+import { addToCart } from "../cart/cartSlice";
+import { CART } from "../cart/cartSlice";
 //import Navbar from "../../components/Navbar";
 const ProductDetail = () => {
   const param = useParams();
@@ -11,8 +13,19 @@ const ProductDetail = () => {
   useEffect(() => {
     dispatch(fetchProductById(id));
   }, [dispatch, id]);
-  //console.log(id);
 
+  
+  function handleAdd(e: React.MouseEvent<Element, MouseEvent>) : void{
+    e.preventDefault();
+    
+    const item : CART = {
+      productId : id,
+      quantity : 1
+    }
+    console.log(item);
+    dispatch(addToCart(item))
+  }
+  //console.log(id);
   return (
     <div className="">
       {product && (
@@ -170,7 +183,7 @@ const ProductDetail = () => {
                     <span className="title-font font-medium text-2xl text-gray-900">
                       {product.price}
                     </span>
-                    <button className="flex ml-auto text-white bg-black border-0 py-2 px-6 focus:outline-none rounded-full">
+                    <button onClick={(e)=> handleAdd(e)} className="flex ml-auto text-white bg-black border-0 py-2 px-6 focus:outline-none rounded-full">
                       Add to cart
                     </button>
                     <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">

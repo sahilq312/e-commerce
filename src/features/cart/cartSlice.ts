@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
-import { PRODUCT } from "../product/productSlice"
 import api from "../../app/Axios"
+import {Key} from 'react'
+
 
 
 export const fetchCart = createAsyncThunk("cart/fetch",async () => {
@@ -9,10 +10,12 @@ export const fetchCart = createAsyncThunk("cart/fetch",async () => {
     
 })
 
-export const addToCart = createAsyncThunk("cart/add",async (cart : CART) => {
-    const response = await api.post("/add", cart, {
+export const addToCart = createAsyncThunk("cart/add",async (item : CART) => {
+    const response = await api.post("/cart/add", item, {
         headers: {'content-type' : 'application/json'}
     })
+    console.log(item);
+    
     return response.data;
 })
 
@@ -21,10 +24,9 @@ export const deleteFromCart = createAsyncThunk("cart/delete", async(productId : 
     return resposne.data;
 })
 
-interface CART {
-    userId : string
-    productId : string
-    quantity? : number
+export interface CART {
+    productId : Key | string | null | undefined
+    quantity: number
 }
 
 interface CARTITEM {
