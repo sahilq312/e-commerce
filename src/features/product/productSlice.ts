@@ -2,14 +2,15 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { Key } from 'react'
 import api from "../../app/Axios"
 export interface PRODUCT {
-    _id: Key | null | undefined
+    _id?: Key | null | undefined
     title: string,
     thumbnail : string,
     price: number,
     description : string,
     brand: string,
     category: string,
-    rating: number
+    rating?: number,
+    stock?: number
 }
 interface ProductState {
     products : PRODUCT[],
@@ -19,7 +20,7 @@ interface ProductState {
 
 export const createProduct = createAsyncThunk('product/create', async(product: PRODUCT)=> {
     const response = await api.post('/product/create', product, {
-        headers: {}
+        headers: {'content-type' : 'application/json'}
     })
     return response.data;
 })
@@ -31,6 +32,9 @@ export const fetchProduct = createAsyncThunk('product/fetch', async()=> {
 export const fetchProductById = createAsyncThunk('product/fetchById', async(id:string| undefined)=> {
     const resposne = await api.get(`product/${id}`)
     return resposne.data;
+})
+export const deleteProduct = createAsyncThunk('/product/delete', async()=> {
+
 })
 
 const initialState : ProductState = {
@@ -59,6 +63,13 @@ const initialState : ProductState = {
         .addCase(fetchProductById.fulfilled, (state, action)=> {
             state.status = "loading";
             state.selectedProduct = action.payload;
+        })
+        .addCase(createProduct.pending, (state)=>{
+            state.status = "loading"
+        })
+        .addCase(createProduct.fulfilled, (state , action)=> {
+            state.status  = "idle";
+            state.products.push(action.payload);
         })
     }
   })

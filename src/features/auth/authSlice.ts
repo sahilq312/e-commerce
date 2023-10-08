@@ -99,6 +99,9 @@ const authSlice = createSlice({
                 state.loggedInUserToken = action.payload
                 state.userChecked = true;
             })
+            .addCase(checkAuthAsync.rejected, (state)=> {
+                state.userChecked = false
+            })
     }
 })
 

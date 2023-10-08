@@ -2,7 +2,7 @@ import './App.css'
 import { RouterProvider} from 'react-router-dom';
 import { router } from './app/routes';
 import { useEffect } from 'react';
-import {  useAppDispatch , useAppSelector } from './app/hooks';
+import {  useAppDispatch ,  useAppSelector } from './app/hooks';
 import { checkAuthAsync } from './features/auth/authSlice'; 
 
 
